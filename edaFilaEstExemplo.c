@@ -89,4 +89,6 @@ int main (int argc, char const *argv[]) {
 	limpa(fila);
 	
 	printf("\n");
+
+	return 0;
 }
