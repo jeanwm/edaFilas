@@ -3,6 +3,8 @@
 
 #define MAX 10
 
+// \(*_*)\ // ¬¬ // 
+
 typedef struct {
 	int cabeca, cauda;
 	int v[MAX];
@@ -72,6 +74,14 @@ void percorre(Fila* f) {
 	}
 }
 
+int espiar(Fila* f, int passo) {
+	if (vazia(f)) {
+		return -1;
+	}
+	
+	return passo == -1? f->v[f->cabeca] : f->v[f->cauda];
+}
+
 int main (int argc, char const *argv[]) {
 	int i;
 	Fila* fila = criar();
@@ -79,6 +89,8 @@ int main (int argc, char const *argv[]) {
 	printf("Enfileirando...");
 	for (i = 1; i <= MAX; i++) {
 		adicionar(fila, i);
+		printf("\nCabeca -> %d, ", (int) espiar(fila, -1));
+		printf("Cauda -> %d ", (int) espiar(fila, 1));
 	}
 	
 	printf("\nDesenfileirando -> ");
