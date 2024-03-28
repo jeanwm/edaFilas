@@ -3,8 +3,6 @@
 
 #define MAX 10
 
-// \(*_*)\ // ¬¬ // 
-
 typedef struct {
 	int cabeca, cauda;
 	int v[MAX];
@@ -39,7 +37,7 @@ void adicionar(Fila* f, int v) {
 	}
 }
 
-int retirar(Fila* f) {
+int remover(Fila* f) {
 	int v;
 	
 	if (vazia(f)) {
@@ -95,7 +93,7 @@ int main (int argc, char const *argv[]) {
 	
 	printf("\nDesenfileirando -> ");
 	while (!vazia(fila)){
-		printf("%d ", retirar(fila));
+		printf("%d ", remover(fila));
 	}
 	
 	limpa(fila);
