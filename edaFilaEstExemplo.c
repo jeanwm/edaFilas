@@ -57,7 +57,7 @@ int remover(Fila* f) {
 	return v;
 }
 
-void limpa(Fila* f) {
+void limpar(Fila* f) {
 	if (f != NULL) {
 		free(f);
 	}
@@ -65,16 +65,23 @@ void limpa(Fila* f) {
 	f = NULL;
 }
 
-void percorre(Fila* f) {
-	int i;
-	for (i = f->cabeca; i != f->cauda; i = (i + 1) % MAX) {
-		printf("%d", f->v[i]);
+void percorrer(Fila* f) {
+	if (vazia(f)) {
+		printf("Fila vazia.");
+		exit(0);
+		
+	} else {
+		int i;
+		for (i = f->cabeca; i != f->cauda; i = (i + 1) % MAX) {
+			printf("%d ", f->v[i]);
+		}
 	}
 }
 
 int espiar(Fila* f, int passo) {
 	if (vazia(f)) {
-		return -1;
+		printf("Fila vazia.");
+		exit(0);
 	}
 	
 	return passo == -1? f->v[f->cabeca] : f->v[f->cauda];
@@ -91,12 +98,17 @@ int main (int argc, char const *argv[]) {
 		printf("Cauda -> %d ", (int) espiar(fila, 1));
 	}
 	
-	printf("\nDesenfileirando -> ");
+	printf("\n");
+	percorrer(fila);
+	
 	while (!vazia(fila)){
-		printf("%d ", remover(fila));
+		remover(fila);
 	}
 	
-	limpa(fila);
+	printf("\n");
+	percorrer(fila);
+	
+	limpar(fila);
 	
 	printf("\n");
 
