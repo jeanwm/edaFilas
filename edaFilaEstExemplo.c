@@ -9,7 +9,7 @@ typedef struct {
 } Fila;
 
 Fila* criar() {
-	Fila* f = malloc(sizeof(Fila));
+	Fila* f = (Fila*) malloc(sizeof(Fila));
 	f->cabeca = f->cauda = -1;
 	
 	return f;
