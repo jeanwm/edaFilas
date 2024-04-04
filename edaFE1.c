@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define MAX 4
+
 typedef struct {
-	int cabeca, cauda, capacidade;
-	int v*;
+	int cabeca, cauda;
+	int v[MAX];
 } Fila;
 
-Fila* criar(int capacidade) {
-	Fila* f = malloc(sizeof(Fila));
-	f->v = malloc(sizeof(int) * capacidade);
-	f->capacidade = capacidade;
+Fila* criar() {
+	Fila* f = (Fila*) malloc(sizeof(Fila));
 	f->cabeca = f->cauda = -1;
 	
 	return f;
@@ -20,7 +20,7 @@ int vazia(Fila* f) {
 }
 
 int cheia(Fila* f) {
-	return (f->cauda + 1) % capacidade == f->cabeca;
+	return (f->cauda + 1) % MAX == f->cabeca;
 }
 
 void adicionar(Fila* f, int v) {
@@ -28,7 +28,7 @@ void adicionar(Fila* f, int v) {
 		printf("Capacidade maxima da fila atingida.");
 		exit(-1);
 	} else {
-		f->cauda = (f->cauda + 1) % capacidade;
+		f->cauda = (f->cauda + 1) % MAX;
 		f->v[f->cauda] = v; // insere na proxima posicao livre
 		
 		if (f->cabeca == -1) {
@@ -50,7 +50,7 @@ int remover(Fila* f) {
 			f->cabeca = f->cauda = -1;
 			
 		} else {
-			f->cabeca = (f->cabeca + 1) % capacidade;
+			f->cabeca = (f->cabeca + 1) % MAX;
 		}
 	}
 	
@@ -65,38 +65,23 @@ void limpar(Fila* f) {
 	f = NULL;
 }
 
-void percorrer(Fila* f) {
-	if (vazia(f)) {
-		printf("Fila vazia.");
-		exit(0);
-		
-	} else {
-		int i;
-		for (i = f->cabeca; i != f->cauda; i = (i + 1) % capacidade) {
-			printf("%d ", f->v[i]);
-		}
-	}
-}
+
 int main (int argc, char const *argv[]) {
-	int i, x;
+	int i, valor;
+	int vetor[] = {10, 15, 3, 7};
 	Fila* fila = criar();
 	
-	for (i = 1; i <= capacidade; i++) {
-		adicionar(fila, i);
+	for (i = 0; i < MAX; i++) {
+		adicionar(fila, vetor[i]);
 	}
 	
 	printf("\n");
-	percorrer(fila);
-	
 	while (!vazia(fila)){
-		remover(fila);
+		valor = remover(fila);
+		printf("%d ", valor);
 	}
-	
-	printf("\n");
-	percorrer(fila);
-	
+
 	limpar(fila);
 	
 	return 0;
 }
-
